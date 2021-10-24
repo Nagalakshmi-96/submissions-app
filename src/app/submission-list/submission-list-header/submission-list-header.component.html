@@ -1,0 +1,105 @@
+<div class="searchBarContainer">
+  <div class="componentName">
+    Submissions
+  </div>
+  <div class="searchBar">
+    <input type="text" class="searchInput" [(ngModel)]="searchSubmissions" placeholder="Search Submissions"/>
+  </div>
+</div>
+
+
+<div class="submissionsMenu">
+  <div class="totalSubmissions">
+    <span id="submissionsCount">{{playerDetails.length}}</span> Submissions
+  </div>
+    <div class="filtersContainer ">
+    <div class="filtersOuterContainer displayStyleFlex">
+  		<div class="assignedToMeCheckBox displayStyleFlex">
+        <input type="checkbox" class="customCheckBox" id="assignedToMe"/>
+        <div class="checkboxValue"><label for="assignedToMe">Assigned To Me</label></div>
+      </div>
+      <div class="pendingFACheckBox displayStyleFlex">
+         <input type="checkbox" class="customCheckBox" id="pendingFA"/>
+         <div class="checkboxValue"><label for="pendingFA">PENDING FA</label></div>
+       </div>
+      <div class="clearFilterContainer displayStyleFlex dataCursor" (click)="clearFiltersFn()">
+        <div class="clearFilterIcon"></div>
+        <div class="filterValue"> CLEAR FILTERS </div>
+      </div>
+  		<div class="showFilterContainer displayStyleFlex dataCursor" (click)="showHideFilterFn()"><div class="showFilter">{{showHideFilterButton}}</div><div [ngClass]="filterArrow"> </div> </div>
+    </div>
+	</div>
+</div>
+<div class="filters displayStyleFlex" *ngIf="showHideFilter">
+
+  <div class="filterStatus">
+    <div class="marginRemove">Status</div>
+    <select class="selectStyle" [(ngModel)]="filterStatusval">
+      <option selected>All statuses</option>
+      <option>Pending</option>
+      <option>Pending (League)</option>
+      <option>Pending (FA & League)</option>
+      <option>Approved</option>
+      <option>Rejected</option>
+      <option>On-hold</option>
+    </select>
+  </div>
+  <div class="filterRegistrationType">
+    <div class="marginRemove" >Registration Type</div>
+    <select class="selectStyle" [(ngModel)]="filterRegType">
+      <option selected>All types</option>
+      <option>Academy</option>
+      <option>Amateur</option>
+      <option>Contract</option>
+      <option>Contract (Weekly)</option>
+      <option>Contract (monthly)</option>
+      <option>Trailist</option>
+      <option>International Clearence</option>
+      <option>Academy</option>
+      <option>Academy (Old)</option>
+      <option>School Boy</option>
+      <option>Student (YD4)</option>
+      <option>Student (YD6)</option>
+      <option>GBE Application</option>
+    </select>
+  </div>
+  <div class="filterRegisteringClub">
+    <div class="marginRemove">Registering Club</div>
+    <input type="text" class="filterinputStyle" placeholder="Search Clubs" [(ngModel)]="filterRegClub"/>
+  </div>
+  <div class="filterAssignees">
+    <div class="marginRemove">Assignees</div>
+    <select class="selectStyle" [(ngModel)]="filterAssignees">
+      <option selected>All assignees</option>
+      <option>Tim Lake</option>
+      <option>Jordan Cargiano</option>
+      <option>Far Test</option>
+    </select>
+  </div>
+  <div class="filterSections">
+    <div class="marginRemove">Sections</div>
+    <select class="selectStyle" [(ngModel)]="filterSections">
+      <option selected>All sections</option>
+      <option>Player</option>
+      <option>Registration</option>
+      <option>Transfer</option>
+      <option>Intermediaries</option>
+      <option>ITC</option>
+      <option>GBE</option>
+    </select>
+  </div>
+  <div class="filterPendingSections">
+    <div class="marginRemove">Pending Section</div>
+    <select class="selectStyle">
+      <option selected>All sections</option>
+      <option>Players</option>
+      <option>Registration</option>
+      <option>Transfer</option>
+      <option>Intermediaries</option>
+      <option>ITC</option>
+      <option>GBE</option>
+    </select>
+  </div>
+</div>
+
+<app-submission-list-data [playerDetails]="playerDetails" [searchText]="searchSubmissions" [filterStatus]="filterStatusval" [filterRegType]="filterRegType" [filterRegClub]="filterRegClub" [filterSections]="filterSections" [filterAssignees]="filterAssignees"></app-submission-list-data>

@@ -1,0 +1,73 @@
+
+<div class="dataHeader headerFont displayStyleFlex">
+  <div class="playerProfile">Profile</div>
+  <div class="registrationType">Registration Type</div>
+  <div class="registeringClub">Registering Club</div>
+  <div class="sectionStatuses">Section Statuses</div>
+  <div class="createdDate displayStyleFlex">
+    <div>Created Date</div>
+    <div class="downArrow"></div>
+  </div>
+  <div class="pagination displayStyleFlex">
+    <div class="displayRight displayStyleFlex">
+      <div class="leftArrow"></div>
+      <div class="rightArrow"></div>
+  </div>
+  </div>
+</div>
+<div  class="dataHeader dataCursor displayStyleFlex" *ngIf='(playerDetails | customFilter:1:searchText | customFilter:2:filterRegClub | customFilter:3:filterStatus | customFilter:4:filterRegType | customFilter:5:filterAssignees |  customFilter:6:filterSections)?.length === 0'>No results Found</div>
+
+
+
+<div class="dataHeader dataCursor displayStyleFlex" *ngFor="let val of playerDetails | customFilter:1:searchText | customFilter:2:filterRegClub | customFilter:3:filterStatus | customFilter:4:filterRegType | customFilter:5:filterAssignees | customFilter:6:filterSections | paginate: { itemsPerPage: 6, currentPage: p }" [routerLink]="['/playerDetails',val.id]">
+
+  <div class="playerProfile">
+    <div class="displayStyleFlex">
+      <div class="userAvatar">
+      </div>
+      <div class="profileDetails">
+        <div class="userName">{{val.firstName}}</div>
+        <div class="userName">{{val.lastName}}</div>
+        <div class="userStatus" [ngClass]="findApplicationStatus(val.status)">{{val.status}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="registrationType">
+    <div>{{val.registrationType}}</div>
+    <div class="userRegistrationID">{{val.registrationID}}</div>
+  </div>
+  <div class="registeringClub">{{val.registeringClub}}</div>
+  <div class="sectionStatuses displayStyleFlex">
+    <div class="sectionStatusesFirst">
+        <div class="displayStyleFlex">
+          <div [ngClass]="findStatusIcon(val.player)"></div><div>Player</div>
+        </div>
+        <div class="displayStyleFlex">
+          <div [ngClass]="findStatusIcon(val.registration)"></div><div>Registration</div>
+        </div>
+        <div class="displayStyleFlex">
+          <div [ngClass]="findStatusIcon(val.registration)"></div><div>Transfer</div>
+        </div>
+    </div>
+    <div class="sectionStatusesSecond">
+        <div class="displayStyleFlex">
+          <div [ngClass]="findStatusIcon(val.intermediaries)"></div><div>Intermediaries</div>
+        </div>
+        <div class="displayStyleFlex">
+          <div [ngClass]="findStatusIcon(val.ITC)"></div><div>ITC</div>
+        </div>
+        <div class="displayStyleFlex">
+          <div [ngClass]="findStatusIcon(val.GBE)"></div><div>GBE</div>
+        </div>
+    </div>
+  </div>
+  <div class="createdDate">
+    <div>{{val.registrationDate}}</div>
+    <div>@ {{val.registrationTime}}</div>
+  </div>
+  <div class="assignedTo" (click)="$event.stopPropagation()"><app-add-assignee [player]="val"></app-add-assignee></div>
+  <div class="commentsIcon">
+  </div>
+  <div class="settingsIcon">
+  </div>
+</div>

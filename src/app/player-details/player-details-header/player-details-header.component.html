@@ -1,0 +1,42 @@
+<div class="playerTitleContainer displayStyleFlex">
+  <div class="backButton">
+    <span class="backButtonText"[routerLink]="['/submissionList']">Back to Submissions</span>
+  </div>
+  <div class="registrationTypeContainer">
+    <div class="registrationType">{{currentPlayer.registrationType}}</div>
+    <div class="registrationID">{{currentPlayer.registrationID}}</div>
+  </div>
+  <div class="assignedToContainer displayStyleFlex">
+    <div class="assignedToText">Assigned To :</div>
+    <div class="assignedTo">
+      <app-add-assignee [player]="currentPlayer"></app-add-assignee>
+    </div>
+  </div>
+
+</div>
+<div class="formsCommentsTabContainer">
+  <div class="formsCommentsTab displayStyleFlex">
+    <div class="formsTab">Forms</div>
+    <div class="commentsTab">Comments</div>
+  </div>
+</div>
+<div class="processButtonGroup displayStyleFlex">
+  <div class="displayStyleFlex" *ngIf="editContentFlag">
+    <div class="cancelButton" (click)="cancelContent()">Cancel</div>
+    <div class="updateButton" (click)="updateContent()">Update</div>
+  </div>
+  <div class="editButton" *ngIf=!editContentFlag (click)="editContent()">Edit</div>
+
+  <div class="moreButtonContainer displayStyleFlex">
+    <div class="moreButtonText">More</div>
+    <div class="verticalLine"></div>
+    <div class="moreButtonArrow"></div>
+  </div>
+  <div class="rejectButton">Reject</div>
+  <div class="approveButton">Approve</div>
+  <div class="switchTabsContainer displayStyleFlex dataCursor">
+      <div class="leftTabIcon"></div>
+      <div class="rightTabIcon"></div>
+  </div>
+</div>
+<app-player-details-data [player]="currentPlayer" [editFlag]="editContentFlag"></app-player-details-data>
